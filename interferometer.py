@@ -136,30 +136,11 @@ class Interferometer(object):
     
         return - 2 * self.df * np.sum(np.abs(self.strain - model)**2 / self.psd)
     
-    def phase_marg_loglikelihood(self, model):
-        """ calculates phase marginalized loglikelihood
-        """
-        x = 4 * self.df * np.abs(np.sum(model * np.conj(self.strain) / self.psd))   # complex <h|d>
-        y = -2 * self.df * np.sum((np.abs(model)**2 + np.abs(self.strain)**2) / self.psd)  # - (<h|h> + <d|d>)/2 
-        #y = -2 * self.df * np.sum((np.abs(model)**2) / self.psd)   
-
-        return y + np.log(i0e(x)) + x            #i0e(x) = exp(-abs(x))*i0(x), where i0 is the modified bessel functionof first kind
-    
     def h_inner_h_plus_d_inner_d(self, model):
         return np.sum((np.abs(model)**2 + np.abs(self.strain)**2) / self.psd) 
     
     def complex_h_inner_d(self, model):
         return np.sum(model * np.conj(self.strain) / self.psd) 
- 
-
-    def network_phase_marg_loglikelihood(self, models, detectors):
-        """ calculates network phase marginalized loglikelihood
-        """
-        Y = -2 * self.df * sum([det.h_inner_h_plus_d_inner_d(models[det.name]) for det in detectors])
-        X = 4 * self.df * np.abs(sum([det.complex_h_inner_d(models[det.name]) for det in detectors]))
-
-        return Y + np.log(i0e(X)) + X            #i0e(x) = exp(-abs(X))*i0(X), where i0 is the modified bessel functionof first kind
-
     
     
     
