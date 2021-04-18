@@ -3,7 +3,7 @@ from scipy.stats import norm, multivariate_normal
 import random
 
 
-# the Metropolis-Hastings algorithm
+# the Metropolis-Hastings algorithm  (following Dr. Messenger's STA Lecture 6)
 
 def metropolis(logprob, n, Q, theta_min, theta_max, start_theta, T, info=False):
     """
