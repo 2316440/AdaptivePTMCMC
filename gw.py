@@ -4,6 +4,8 @@ import lalsimulation as lalsim
 from astropy.cosmology import FlatLambdaCDM
 from scipy.interpolate import interp1d
 
+#Note: the below routine for frequency domain waveform simulation comes from from gwcosmo detection_probability.py.
+#But: it was me who wrote that routine as part of my summer project with Dr. Veitch & Dr. Messenger.
 def simulate_fd_waveform(m1, m2, dl, iota, phi, df, f_min, S1x=0., S1y=0., S1z=0., S2x=0., S2y=0., S2z=0., lAN=0., e=0., Ano=0.):       
         """
         Simulates frequency domain inspiral waveform
@@ -90,7 +92,7 @@ def model(theta, detectors):
             signal = signals[det.name] #set signal to the 0 signal
             signal[0:len(hf)] = hf #signal padded with zeros up to Nyquist frequency
     
-        #apply delay (following bibly interferometer.p, line 316-322)
+        #apply delay (following bilby interferometer.p, line 316-322)
         dt_geoct = t0 - det.t_start   #geocentic time of arrival - time segment start time   (time delay at geocenter, 0 for t0_true) 
         dt_delay = det.get_time_delay(ra, dec, t0)  #travel time between geocenter & detector
         tau = dt_geoct + dt_delay
@@ -101,7 +103,7 @@ def model(theta, detectors):
     return signals
     
     
-def antenna_response(gpsTime, ra, dec, psi, det):
+def antenna_response(gpsTime, ra, dec, psi, det):      #from the lab tutorial 
     """
     Get the response of a detector to plus and cross polarisation signals.
     
