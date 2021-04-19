@@ -128,12 +128,7 @@ class Interferometer(object):
     
     def loglikelihood(self, model):
         """ calculates loglikelihood
-        """
-        #data = delta t * fft of the data (one sided) 
-        #model is the signal hypothesis
-        #noise_psd - one sided psd of the noise
-        #return -0.5 * np.sum( np.abs(data - model)**2 / sigma_noise_squared)     
-    
+        """    
         return - 2 * self.df * np.sum(np.abs(self.strain - model)**2 / self.psd)
     
     def h_inner_h_plus_d_inner_d(self, model):
