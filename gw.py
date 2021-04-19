@@ -101,22 +101,6 @@ def model(theta, detectors):
         signals[det.name] = signal
     
     return signals
-    
-
-def sigma_squared_noise(noise_psd, T):
-    #noise psd is one sided noise psd
-    return  T/2 * noise_psd
-
-def loglikelihood(data, model, df, noise_psd):
-    #data = delta t * fft of the data (one sided) 
-    #model is the signal hypothesis
-    #noise_psd - one sided psd of the noise
-    
-    return - 2 * df * np.sum(np.abs(data - model)**2 / noise_psd)
-
-def likelihood(loglikelihood):
-    #this is not normalized, but will be between 0-1 (1 for maximum likelihood)
-    return np.exp(loglikelihood-loglikelihood.max())
 
 def chirp_mass(m1,m2):
     return (m1*m2)**(3/5) / (m1+m2)**(1/5)
