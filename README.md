@@ -1,7 +1,6 @@
 ## Adaptive PTMCMC algorithm (Honours Project)
 
-This repository contains the code written for the purposes of my Honours Project, whose aim was to design an adaptive PTMCMC algorithm 
-for compact binary gravitational wave parameter estimation.
+This repository contains the code written for the purposes of my Honours Project, whose aim was to design an adaptive Parallel Tempering Markov chain Monte Carlo (PTMCMC) algorithm for compact binary gravitational wave parameter estimation.
 
 ptmcmc.py contains the adaptive (AP) PTMCMC algorithm designed as part of the project - this can be used on any distribution. 
 It passed the K-S test on a unimodal correlated Gaussian (9D), bimodal uncorrelated Gaussian (9D), Rosenbrock's banana function (3D) at 5% significance level.
