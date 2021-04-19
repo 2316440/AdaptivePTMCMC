@@ -111,7 +111,6 @@ def loglikelihood(data, model, df, noise_psd):
     #data = delta t * fft of the data (one sided) 
     #model is the signal hypothesis
     #noise_psd - one sided psd of the noise
-    #return -0.5 * np.sum( np.abs(data - model)**2 / sigma_noise_squared)
     
     return - 2 * df * np.sum(np.abs(data - model)**2 / noise_psd)
 
