@@ -102,47 +102,6 @@ def model(theta, detectors):
     
     return signals
     
-    
-def antenna_response(gpsTime, ra, dec, psi, det):      #from the lab tutorial 
-    """
-    Get the response of a detector to plus and cross polarisation signals.
-    
-    Args:
-        gpsTime (float): the GPS time of the observations
-        ra (float): the right ascension of the source (rads)
-        dec (float): the declination of the source (rads)
-        psi (float): the polarisation angle of the source (rads)
-        det (str): a detector name (e.g., 'H1' for the LIGO Hanford detector)
-    
-    Returns:
-        The plus and cross response.
-    """
-    
-    gps = lal.LIGOTimeGPS(gpsTime)
-    gmst_rad = lal.GreenwichMeanSiderealTime(gps)
-
-    # create detector-name map
-    detMap = {'H1': lal.LALDetectorIndexLHODIFF,
-              'H2': lal.LALDetectorIndexLHODIFF,
-              'L1': lal.LALDetectorIndexLLODIFF,
-              'G1': lal.LALDetectorIndexGEO600DIFF,
-              'V1': lal.LALDetectorIndexVIRGODIFF,
-              'T1': lal.LALDetectorIndexTAMA300DIFF}
-
-    try:
-        detector=detMap[det]
-    except KeyError:
-        raise ValueError("ERROR. Key {} is not a valid detector name.".format(det))
-
-    # get detector
-    detval = lal.CachedDetectors[detector]
-
-    response = detval.response
-
-    # actual computation of antenna factors
-    fp, fc = lal.ComputeDetAMResponse(response, ra, dec, psi, gmst_rad)
-
-    return fp, fc
 
 def sigma_squared_noise(noise_psd, T):
     #noise psd is one sided noise psd
